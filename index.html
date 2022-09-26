@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <body>
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
     <div id="root"></div>
     <script type="text/babel">
-      const rootElement = document.getElementById("root");
-      const paint = () => {
-          <>
-            <h1>Hi</h1>
-            <h3>Bye</h3>
-          </>
-      };
+      class App extends React.Component {
+        render() {
+          return <h1>Hello world!</h1>
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById('root'))
       
-      const element = (<>
-          {paint()},
-          {paint()},
-          {paint()},
-      </>)
-      ReactDOM.render(element, rootElement);
     </script>
   </body>
 </html>
