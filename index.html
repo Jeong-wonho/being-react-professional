@@ -11,86 +11,57 @@
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <div id="root"></div>
+    <style>
+      .button {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      .blue {
+        background-color: #008cba;
+      } /* Blue */
+      .red {
+        background-color: #f44336;
+      } /* Red */
+      .gray {
+        background-color: #e7e7e7;
+        color: black;
+      } /* Gray */
+      .black {
+        background-color: #555555;
+      } /* Black */
+    </style>
     <script type="text/babel">
-      const rootElement = document.getElementById("root");
-
-      const Child = () => {
-        console.log("   Child render start");
-        const [text, setText] = React.useState(() => {
-          console.log("   Child useState");
-          return "";
-        });
-        React.useEffect(() => {
-          console.log("   child useEffect no deps");
-          return () => {
-            console.log("   child useEffect [clean up], no debs");
-          };
-        });
-        React.useEffect(() => {
-          console.log("   child useEffect empty deps");
-          return () => {
-            console.log("   child useEffect [clean up], empty debs");
-          };
-        }, []);
-        React.useEffect(() => {
-          console.log("   child useEffect [text]");
-          return () => {
-            console.log("   child useEffect [clean up], [text]");
-          };
-        }, [text]);
-        const handleChange = (e) => {
-          setText(e.target.value);
-        };
-        const element = (
-          <>
-            <input onChange={handleChange} />
-            <p>{text}</p>
-          </>
-        );
-        console.log("   Child render end");
-        return element;
-      };
-      const App = () => {
-        console.log("render start");
-        const [show, setShow] = React.useState(() => {
-          console.log("useState start");
-          return false;
-        });
-
-        const handleClick = () => {
-          setShow((prev) => !prev);
-        };
-
-        React.useEffect(() => {
-          console.log("app useEffect no deps");
-          return () => {
-            console.log("app useEffect [clean up], no debs");
-          };
-        });
-
-        React.useEffect(() => {
-          console.log("app useEffect empty deps");
-          return () => {
-            console.log("app useEffect [clean up], empty debs");
-          };
-        }, []);
-
-        React.useEffect(() => {
-          console.log("app useEffect [show]");
-          return () => {
-            console.log("app useEffect [clean up], [show]");
-          };
-        }, [show]);
-        console.log("render end");
+      function Button({ className = "", style, ...rest }) {
         return (
-          <>
-            <button onClick={handleClick}>Search</button>
-            {show ? <Child /> : null}
-          </>
+          <button
+            className={`button${className === "" ? "" : ` ${className}`}`}
+            style={style}
+            {...rest}
+          />
         );
-      };
+      }
+      const element = (
+        <>
+          <Button style={{ borderRadius: "50%" }}>Green</Button>
+          <Button className="blue" style={{ borderRadius: 8 }}>
+            Blue
+          </Button>
+          <Button className="red">Red</Button>
+          <Button className="gray">Gray</Button>
+          <Button className="black">Black</Button>
+        </>
+      );
 
-      ReactDOM.render(<App />, rootElement);
+      ReactDOM.render(element, document.getElementById("root"));
     </script>
   </body>
 </html>
