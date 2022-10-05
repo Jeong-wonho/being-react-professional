@@ -14,44 +14,44 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      function useLocalStorage(itemName, value = "") {
-        console.log(value);
-        const [state, setState] = React.useState(() => {
-          return window.localStorage.getItem(itemName) || value;
+      const App = () => {
+        console.log("render start");
+        const [isShow, setIsShow] = React.useState(() => {
+          console.log("useState start");
+          return false;
+        });
+
+        const handleClick = () => {
+          setIsShow((prev) => !prev);
+        };
+
+        React.useEffect(() => {
+          console.log("useEffect no deps");
         });
 
         React.useEffect(() => {
-          window.localStorage.setItem(itemName, state);
-        }, [state]);
+          console.log("useEffect empty deps");
+        }, []);
 
-        return [state, setState];
-      }
-
-      const App = () => {
-        const [keyword, setKeyword] = useLocalStorage("keyword");
-        const [result, setResult] = useLocalStorage("result");
-        const [typing, setTyping] = useLocalStorage("typing", false);
-
-        function handleChange(event) {
-          setKeyword(event.target.value);
-          setTyping(true);
-        }
-
-        function handleClick() {
-          setTyping(false);
-          setResult(`we find result of ${keyword}`);
-        }
+        React.useEffect(() => {
+          console.log("useEffect [isShow]");
+        }, [isShow]);
 
         return (
           <>
-            <input onChange={handleChange} value={keyword} />
-            <button onClick={handleClick}>search</button>
-            <p>{typing ? `Looking for ${keyword}` : result} </p>
+            <button onClick={handleClick}>Search</button>
+            {isShow ? (
+              <>
+                <input />
+                <p></p>
+              </>
+            ) : null}
           </>
         );
       };
 
       ReactDOM.render(<App />, rootElement);
+      console.log("render end");
     </script>
   </body>
 </html>
