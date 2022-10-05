@@ -14,44 +14,83 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
+      const Child = () => {
+        console.log("   Child render start");
+        const [text, setText] = React.useState(() => {
+          console.log("   Child useState");
+          return "";
+        });
+        React.useEffect(() => {
+          console.log("   child useEffect no deps");
+          return () => {
+            console.log("   child useEffect [clean up], no debs");
+          };
+        });
+        React.useEffect(() => {
+          console.log("   child useEffect empty deps");
+          return () => {
+            console.log("   child useEffect [clean up], empty debs");
+          };
+        }, []);
+        React.useEffect(() => {
+          console.log("   child useEffect [text]");
+          return () => {
+            console.log("   child useEffect [clean up], [text]");
+          };
+        }, [text]);
+        const handleChange = (e) => {
+          setText(e.target.value);
+        };
+        const element = (
+          <>
+            <input onChange={handleChange} />
+            <p>{text}</p>
+          </>
+        );
+        console.log("   Child render end");
+        return element;
+      };
       const App = () => {
         console.log("render start");
-        const [isShow, setIsShow] = React.useState(() => {
+        const [show, setShow] = React.useState(() => {
           console.log("useState start");
           return false;
         });
 
         const handleClick = () => {
-          setIsShow((prev) => !prev);
+          setShow((prev) => !prev);
         };
 
         React.useEffect(() => {
-          console.log("useEffect no deps");
+          console.log("app useEffect no deps");
+          return () => {
+            console.log("app useEffect [clean up], no debs");
+          };
         });
 
         React.useEffect(() => {
-          console.log("useEffect empty deps");
+          console.log("app useEffect empty deps");
+          return () => {
+            console.log("app useEffect [clean up], empty debs");
+          };
         }, []);
 
         React.useEffect(() => {
-          console.log("useEffect [isShow]");
-        }, [isShow]);
-
+          console.log("app useEffect [show]");
+          return () => {
+            console.log("app useEffect [clean up], [show]");
+          };
+        }, [show]);
+        console.log("render end");
         return (
           <>
             <button onClick={handleClick}>Search</button>
-            {isShow ? (
-              <>
-                <input />
-                <p></p>
-              </>
-            ) : null}
+            {show ? <Child /> : null}
           </>
         );
       };
 
       ReactDOM.render(<App />, rootElement);
-      console.log("render end");
     </script>
   </body>
 </html>
