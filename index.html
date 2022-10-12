@@ -14,24 +14,28 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
       const App = () => {
-        const inputRef = React.useRef();
-        const divRef = React.useRef();
-
-        React.useEffect(() => {
-          inputRef.current.focus();
-
-          setTimeout(() => {
-            divRef.current.style.backgroundColor = "pink";
-          }, 1000);
-        });
+        const handleSubmit = (event) => {
+          event.preventDefault();
+          console.dir(event.target.elements);
+          alert(
+            `FirstName: ${event.target.elements.fname.value}, LastName: ${event.target.elements.lname.value}`
+          );
+        };
 
         return (
           <>
-            <input ref={inputRef} />
-            <div
-              ref={divRef}
-              style={{ height: 100, width: 300, backgroundColor: "brown" }}
-            />
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="fname">First name:</label>
+              <br />
+              <input type="text" id="fname" name="fname" defaultValue="John" />
+              <br />
+              <label htmlFor="lname">Last name:</label>
+              <br />
+              <input type="text" id="lname" name="lname" defaultValue="Doe" />
+              <br />
+              <br />
+              <input type="submit" value="submit" />
+            </form>
           </>
         );
       };
