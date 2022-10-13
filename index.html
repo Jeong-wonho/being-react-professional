@@ -14,71 +14,66 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      const todos = [
-        [
-          { id: 1, value: "Wash dishes" },
-          { id: 2, value: "Clean the bed" },
-          { id: 3, value: "Running" },
-          { id: 4, value: "Learning" },
-        ],
-        [
-          { id: 4, value: "Learning" },
-          { id: 1, value: "Wash dishes" },
-          { id: 2, value: "Clean the bed" },
-          { id: 3, value: "Running" },
-        ],
-        [
-          { id: 3, value: "Running" },
-          { id: 4, value: "Learning" },
-          { id: 1, value: "Wash dishes" },
-          { id: 2, value: "Clean the bed" },
-        ],
-        [
-          { id: 2, value: "Clean the bed" },
-          { id: 3, value: "Running" },
-          { id: 4, value: "Learning" },
-          { id: 1, value: "Wash dishes" },
-        ],
-      ];
+      // id, pwd 각각 컴포넌트로 만들어서 사용한다.
+      const Id = ({ handleIdChange }) => {
+        return (
+          <>
+            <label htmlFor="loginId">ID:</label>
+            <input
+              type="text"
+              id="loginId"
+              name="loginId"
+              placeholder="id입력해주세요"
+              onChange={handleIdChange}
+            />
+          </>
+        );
+      };
 
+      const Password = ({ handlePwChange }) => {
+        return (
+          <>
+            <label htmlFor="loginPw">PW:</label>
+            <input
+              type="password"
+              id="loginPw"
+              name="loginPw"
+              placeholder="password입력해주세요."
+              onChange={handlePwChange}
+            />
+          </>
+        );
+      };
       const App = () => {
-        const [items, setItems] = React.useState(todos[0]);
+        const [id, setId] = React.useState("");
+        const [pw, setPw] = React.useState("");
 
-        React.useEffect(() => {
-          const interval = setInterval(() => {
-            const random = Math.floor(Math.random() * 3);
-            console.log(random);
-            setItems(todos[random]);
-          }, 1000);
-
-          return () => {
-            clearInterval(interval);
-          };
-        }, []);
-
-        const handleDoneClick = (todo) => {
-          setItems((items) => items.filter((item) => item !== todo));
+        const handleIdChange = (event) => {
+          setId(event.target.value);
+          console.log(id.length);
         };
 
-        const handleRestoreClick = (todo) => {
-          setItems((items) => [
-            ...items,
-            todos.find((item) => !items.includes(item)),
-          ]);
+        const handlePwChange = (event) => {
+          setPw(event.target.value);
+          console.log(pw.length);
+        };
+        const handleLoginClick = () => {
+          alert("login 되엇습니다.");
         };
 
         return (
           <>
-            {items.map((todo, index) => (
-              <div key={index}>
-                <button onClick={() => handleDoneClick(todo)}>
-                  {todo.value}
-                </button>
-              </div>
-            ))}
-            <br />
-            <br />
-            <button onClick={handleRestoreClick}>Restore</button>
+            <form>
+              <Id handleIdChange={handleIdChange} />
+              <br />
+              <Password handlePwChange={handlePwChange} />
+              <input
+                type="submit"
+                value="login"
+                disabled={id.length === 0 || pw.length === 0}
+                onClick={handleLoginClick}
+              />
+            </form>
           </>
         );
       };
