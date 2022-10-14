@@ -14,67 +14,39 @@
     <script type="text/babel">
       const rootElement = document.getElementById("root");
 
-      // id, pwd 각각 컴포넌트로 만들어서 사용한다.
-      const Id = ({ handleIdChange }) => {
-        return (
-          <>
-            <label htmlFor="loginId">ID:</label>
-            <input
-              type="text"
-              id="loginId"
-              name="loginId"
-              placeholder="id입력해주세요"
-              onChange={handleIdChange}
-            />
-          </>
-        );
-      };
-
-      const Password = ({ handlePwChange }) => {
-        return (
-          <>
-            <label htmlFor="loginPw">PW:</label>
-            <input
-              type="password"
-              id="loginPw"
-              name="loginPw"
-              placeholder="password입력해주세요."
-              onChange={handlePwChange}
-            />
-          </>
-        );
-      };
       const App = () => {
-        const [id, setId] = React.useState("");
-        const [pw, setPw] = React.useState("");
+        const [data, setData] = React.useState(null);
+        const [error, setError] = React.useState(null);
 
-        const handleIdChange = (event) => {
-          setId(event.target.value);
-          console.log(id.length);
-        };
+        React.useEffect(() => {
+          fetch(
+            "https://raw.githubusercontent.com/techoi/raw-data-api/main/simple-api.json"
+          )
+            .then((response) => response.json())
+            .then((myJson) => setData(myJson.data))
+            .catch((error) => {
+              setError(error);
+            });
+        }, []);
 
-        const handlePwChange = (event) => {
-          setPw(event.target.value);
-          console.log(pw.length);
-        };
-        const handleLoginClick = () => {
-          alert("login 되엇습니다.");
-        };
-
+        if (error != null) {
+          return <p>{error.message}</p>;
+        }
+        if (data == null) {
+          return <p style={{ color: "red" }}>Loading...</p>;
+        }
         return (
-          <>
-            <form>
-              <Id handleIdChange={handleIdChange} />
-              <br />
-              <Password handlePwChange={handlePwChange} />
-              <input
-                type="submit"
-                value="login"
-                disabled={id.length === 0 || pw.length === 0}
-                onClick={handleLoginClick}
-              />
-            </form>
-          </>
+          <div>
+            <p>People</p>
+            <p>
+              {data.people.map((person) => (
+                <div>
+                  <span>Name: {person.name} </span>
+                  <span>Age: {person.age}</span>
+                </div>
+              ))}
+            </p>
+          </div>
         );
       };
 
