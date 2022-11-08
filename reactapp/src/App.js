@@ -7,14 +7,18 @@ import "./App.css";
 // import FunctionalComponents from "./components/2-5.State/FunctionalComponents";
 // import ClassComponents2 from "./components/2-6.LifeCycle/ClassComponents";
 // import Event from "./components/2-7.Event/Event";
-import ControlledComponent from "./components/2-10.Form/ControlledComponent";
-import UnControlledComponent from "./components/2-10.Form/UnControlledComponent";
+// import ControlledComponent from "./components/2-10.Form/ControlledComponent";
+// import UnControlledComponent from "./components/2-10.Form/UnControlledComponent";
+import State from "./components/3-3. Hooks/State";
+import Reducer from "./components/3-3. Hooks/Reducer";
 
 function App() {
   return (
     <div className="App">
-      <UnControlledComponent />
-      <ControlledComponent />
+      <Reducer />
+      <State />
+      {/* <UnControlledComponent />
+      <ControlledComponent /> */}
       {/* <List /> */}
       {/* <Condition /> */}
       {/* <Event /> */}
