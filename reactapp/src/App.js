@@ -9,14 +9,16 @@ import "./App.css";
 // import Event from "./components/2-7.Event/Event";
 // import ControlledComponent from "./components/2-10.Form/ControlledComponent";
 // import UnControlledComponent from "./components/2-10.Form/UnControlledComponent";
-import State from "./components/3-3. Hooks/State";
-import Reducer from "./components/3-3. Hooks/Reducer";
+// import State from "./components/3-3. Hooks/State";
+// import Reducer from "./components/3-3. Hooks/Reducer";
+import WelcomeDialog from "./components/3-5.Composition/WelcomeDialog";
 
 function App() {
   return (
     <div className="App">
-      <Reducer />
-      <State />
+      <WelcomeDialog />
+      {/* <Reducer />
+      <State /> */}
       {/* <UnControlledComponent />
       <ControlledComponent /> */}
       {/* <List /> */}
