@@ -12,12 +12,19 @@ import "./App.css";
 // import State from "./components/3-3. Hooks/State";
 // import Reducer from "./components/3-3. Hooks/Reducer";
 // import WelcomeDialog from "./components/3-5.Composition/WelcomeDialog";
-import ThankyouDialog from "./components/3-6.Composition2/ThankyouDialog";
+// import ThankyouDialog from "./components/3-6.Composition2/ThankyouDialog";
+import Input from "./components/3-7. HOC/Input";
+import Button from "./components/3-7. HOC/Button";
 
 function App() {
   return (
     <div className="App">
-      <ThankyouDialog />
+      <Input />
+      <br />
+      <br />
+      <br />
+      <Button />
+      {/* <ThankyouDialog /> */}
       {/* <Dialog />
       <WelcomeDialog /> */}
       {/* <Reducer />
