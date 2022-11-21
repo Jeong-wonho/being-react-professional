@@ -1,6 +1,7 @@
 import "./App.css";
-import Example from "./components/3-11. Portal/Example";
 
+import Component from "./components/3-14.PropComponent/Component";
+// import Example from "./components/3-11. Portal/Example";
 // import Condition from "./components/2-8.ConditionalRendering/Condition";
 // import List from "./components/2-9.List/List";
 // import ClassComponents from "./components/2-5.State/ClassComponents";
@@ -23,7 +24,8 @@ import Example from "./components/3-11. Portal/Example";
 function App() {
   return (
     <div className="App">
-      <Example />
+      <Component />
+      {/* <Example /> */}
       {/* <Input />
       <br />
       <br />
