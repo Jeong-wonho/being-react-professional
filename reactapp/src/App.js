@@ -1,6 +1,6 @@
 import "./App.css";
 
-import Component from "./components/3-14.PropComponent/Component";
+// import Component from "./components/3-14.PropComponent/Component";
 // import Example from "./components/3-11. Portal/Example";
 // import Condition from "./components/2-8.ConditionalRendering/Condition";
 // import List from "./components/2-9.List/List";
@@ -18,13 +18,14 @@ import Component from "./components/3-14.PropComponent/Component";
 // import ThankyouDialog from "./components/3-6.Composition2/ThankyouDialog";
 // import Input from "./components/3-7. HOC/Input";
 // import Button from "./components/3-7. HOC/Button";
-// import Memo from "./components/3-8. Memoization/Memo";
+import Memo from "./components/3-8. Memoization/Memo";
 // import Example from "./components/3-10. Context/Example";
 
 function App() {
   return (
     <div className="App">
-      <Component />
+      <Memo />
+      {/* <Component /> */}
       {/* <Example /> */}
       {/* <Input />
       <br />

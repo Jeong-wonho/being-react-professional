@@ -25,6 +25,7 @@ function CommentItem({ title, content, likes, onClick }) {
     console.log("rate check");
     return likes > 10 ? "Good" : "Bad";
   }, [likes]);
+
   return (
     <Profiler id="CommentItem" onRender={onRenderCallback}>
       <div className="CommentItem" onClick={handleClick}>
@@ -32,7 +33,7 @@ function CommentItem({ title, content, likes, onClick }) {
         <span>{content}</span>
         <span>{likes}</span>
         <br />
-        <span>{rate()}</span>
+        <span>{rate}</span>
         <br></br>
         <span>{clickCount}</span>
       </div>
