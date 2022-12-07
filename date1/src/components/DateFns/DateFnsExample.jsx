@@ -1,35 +1,38 @@
 import React, { useRef, useState } from "react";
-import moment from "moment-timezone";
 import "moment/locale/ko";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { add, format, sub, differenceInHours } from "date-fns";
+import addWeeks from "date-fns/addWeeks";
+import { ko } from "date-fns/locale";
+
 //locale 설정
 dayjs.locale("ko");
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function DayjsExample() {
+export default function DateFnsExample() {
   const birthDayRef = useRef(null);
   const [day, setDay] = useState("");
   const handleBirthDayChange = (event) => {
-    setDay(dayjs(event.target.value, "YYYY-MM-DD").format("dddd"));
+    setDay(format(new Date(event.target.value), "EEEE", { locale: ko }));
   };
 
-  const dayjsDate = dayjs();
-  const newDayjsdate = dayjsDate.add(1, "week");
-  const cloneNewDayjsDate = newDayjsdate.add(1, "week");
+  const dateFnsDate = new Date();
+  const newDateFnsDate = add(dateFnsDate, { weeks: 1 });
+  const newDateFnsDate2 = addWeeks(newDateFnsDate, 1);
   return (
     <div>
-      <h1>day js</h1>
+      <h1>date-fns</h1>
       <div>Immutable Check</div>
       <div>
-        {dayjsDate.format()}
+        {format(dateFnsDate, "yyyy-MM-dd")}
         <br />
-        {newDayjsdate.format()}
+        {format(newDateFnsDate, "yyyy-MM-dd")}
         <br />
-        {cloneNewDayjsDate.format()}
+        {format(newDateFnsDate2, "yyyy-MM-dd")}
       </div>
       <br />
       <div>Summer Time (New-york)</div>
@@ -51,17 +54,17 @@ export default function DayjsExample() {
       <div>Leap year korea</div>
       <div>
         2017년 1월 1일 1년 빼기:
-        {dayjs("2017-01-01").subtract(1, "year").format()}
+        {format(sub(new Date("2017-01-01"), { years: 1 }), "yyyy-MM-dd")}
       </div>
       <br />
       <div>
         2017년 1월 1일 365 빼기:
-        {dayjs("2017-01-01").subtract(365, "day").format()}
+        {format(sub(new Date("2017-01-01"), { day: 365 }), "yyyy-MM-dd")}
       </div>
       <br />
       <div>
         한국어로 표기 하기 07-17-2021을 2021 7월 7일로 표기
-        {dayjs("07-17-2021").format("YYYY M월 D일")}
+        {format(new Date("2017-01-01"), "yyyy M월 d일")}
       </div>
       <br />
       <div> 자기 생일 요일 찾기 </div>
@@ -74,7 +77,10 @@ export default function DayjsExample() {
       <div>두 날짜 비교</div>
       <div>2021-07-17 03:00 와 2021-07-18 02:00은 몇시간 차이인가?</div>
       <div>
-        {moment("2021-07-17 03:00").diff(moment("2021-07-18 02:00"), "hours")}
+        {`${differenceInHours(
+          new Date("2021-07-17 03:00"),
+          new Date("2021-07-18 02:00")
+        )} 시간`}
       </div>
     </div>
   );
