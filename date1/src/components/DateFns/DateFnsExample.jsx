@@ -5,6 +5,7 @@ import "dayjs/locale/ko";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { add, format, sub, differenceInHours } from "date-fns";
+import { format as timezoneFormat, toDate } from "date-fns-tz";
 import addWeeks from "date-fns/addWeeks";
 import { ko } from "date-fns/locale";
 
@@ -36,20 +37,31 @@ export default function DateFnsExample() {
       </div>
       <br />
       <div>Summer Time (New-york)</div>
-      <div>{dayjs.tz.guess()}</div>
       <div>
         2018년 3월 10일 13시에 하루 더하기
-        {dayjs
-          .tz("2018-03-13 13:00:00", "America/New_York")
-          .add(1, "day")
-          .format()}
+        {timezoneFormat(
+          add(new Date("2018-03-19 :13:00:00"), {
+            days: 1,
+          }),
+          "yyyy-MM-dd HH:mm:ssXXX",
+          { timeZone: "America/New_York" }
+        )}
       </div>
+      <br />
       <div>
         2018년 3월 10일 24시에 하루 더하기
-        {dayjs
-          .tz("2018-03-13 13:00:00", "America/New_York")
-          .add(24, "hour")
-          .format()}
+        {timezoneFormat(
+          add(
+            toDate(new Date("2018-03-19 :13:00:00"), {
+              timeZone: "America/New_York",
+            }),
+            {
+              hours: 24,
+            }
+          ),
+          "yyyy-MM-dd HH:mm:ssXXX",
+          { timeZone: "America/New_York" }
+        )}
       </div>
       <div>Leap year korea</div>
       <div>
